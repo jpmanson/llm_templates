@@ -5,7 +5,7 @@ README = (Path(__file__).parent/"README.md").read_text()
 
 setuptools.setup(
     name="llm-templates",
-    version="0.1.3",
+    version="0.1.4",
     author="Juan Pablo Manson",
     author_email="jpmanson@gmail.com",
     description="Instruction/chat prompts creation library for text generation LLM. It supports local and Hugging Face models.",
