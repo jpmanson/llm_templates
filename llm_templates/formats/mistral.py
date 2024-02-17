@@ -1,4 +1,3 @@
-from jinja2 import Environment
 from llm_templates.common import Conversation, Content, jinja_env
 
 

@@ -18,8 +18,8 @@ messages = [
 formatter = Formatter()
 
 # Local model
-conversation = Conversation(model="zephyr", messages=messages)
-print(formatter.render(conversation, add_assistant_prompt=True))
+conversation = Conversation(model="llama2", messages=messages)
+print(formatter.render(conversation))
 
 # Hugging Face models
 model = "mistralai/Mixtral-8x7B-Instruct-v0.1"

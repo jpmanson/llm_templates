@@ -2,7 +2,7 @@ from llm_templates.common import Conversation, jinja_env
 import requests
 import os
 import json
-from llm_templates.formats import zephyr, mistral
+from llm_templates.formats import zephyr, mistral, llama2
 
 HF_URL = 'https://huggingface.co/'
 
