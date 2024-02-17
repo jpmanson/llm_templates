@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.1.5",
     author="Juan Pablo Manson",
     author_email="jpmanson@gmail.com",
-    description="Instruction/chat prompts creation library for text generation LLM. It supports local and Hugging Face models.",
+    description="Instruction/chat prompts creation library for text generation LLMs. It supports local and Hugging Face models.",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/jpmanson/llm-templates",
