@@ -1,12 +1,8 @@
-from jinja2 import Template
-from llm_templates.common import Conversation, Content
+from llm_templates.common import Conversation, get_jinja_env
+from jinja2 import Environment
 
 
 def apply_template(conversation: Conversation, **kwargs):
-    if kwargs.get('add_assistant_prompt', False):
-        conversation.messages.append(Content(role='assistant', content=''))
-
-    # Definir la plantilla Jinja
     template_str = "{% for message in messages %}"
     template_str += "{% if message['role'] == 'user' %}"
     template_str += "<|user|>{{ message['content'] }}</s>\n"
@@ -18,9 +14,15 @@ def apply_template(conversation: Conversation, **kwargs):
     template_str += "<|unknown|>{{ message['content'] }}</s>\n"
     template_str += "{% endif %}"
     template_str += "{% endfor %}"
+    template_str += "{% if add_generation_prompt %}"
+    template_str += "<|assistant|>\n"
+    template_str += "{% endif %}"
 
-    # Crear un objeto de plantilla con la cadena de plantilla
-    template = Template(template_str)
+    # Load template
+    bos_token = "<s>"
+    eos_token = "</s>"
+    template = get_jinja_env().from_string(template_str)
 
     # Renderizar la plantilla con los mensajes proporcionados
-    return template.render(messages=conversation.messages)
+    return template.render(messages=conversation.messages, bos_token=bos_token, eos_token=eos_token,
+                           add_generation_prompt=kwargs.get('add_assistant_prompt', False))

@@ -17,10 +17,17 @@ messages = [
 
 formatter = Formatter()
 
-# Local model zephyr
-conversation = Conversation(model="zephyr", messages=messages)
+# Local model mistral
+print('# mistral')
+conversation = Conversation(model="mistral", messages=messages)
 print(formatter.render(conversation))
 
-# Local model mistral
-conversation = Conversation(model="mistral", messages=messages)
+# Local model llama2
+print('# llama2')
+conversation = Conversation(model="llama2", messages=messages)
+print(formatter.render(conversation))
+
+# Local model zephyr
+print('# zephyr')
+conversation = Conversation(model="zephyr", messages=messages)
 print(formatter.render(conversation))

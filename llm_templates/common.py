@@ -19,5 +19,9 @@ def raise_exception(message):
     raise Exception(message)
 
 
-jinja_env = Environment()
-jinja_env.globals['raise_exception'] = raise_exception
+def get_jinja_env(**kwargs):
+    jinja_env = Environment()
+    jinja_env.globals['raise_exception'] = raise_exception
+    jinja_env.globals.update(kwargs)
+    return jinja_env
+

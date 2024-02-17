@@ -1,4 +1,4 @@
-from llm_templates.common import Conversation, jinja_env
+from llm_templates.common import Conversation, get_jinja_env
 import requests
 import os
 import json
@@ -101,7 +101,7 @@ def hf_render(conversation: Conversation, tokenizer_config: dict, **kwargs) -> s
 
     template_str = tokenizer_config.get("chat_template", '')
 
-    template = jinja_env.from_string(template_str)
+    template = get_jinja_env().from_string(template_str)
 
     for k, v in tokenizer_config.items():
         if isinstance(v, dict) and tokenizer_config[k].get('__type') == 'AddedToken':
