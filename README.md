@@ -1,13 +1,11 @@
 ## `llm-templates`
+![PyPI - Version](https://img.shields.io/pypi/v/llm-templates?color=%252334D058)
+
 It's a conversation formatter for chat models. The library allows you to easily format a chat conversation, with the same format with which the language model was trained. The library is installed with pip:
 
 ```
 pip install llm-templates
 ```
-
-<a href="https://pypi.org/project/fastapi" target="_blank">
-    <img src="https://img.shields.io/pypi/pyversions/fastapi.svg?color=%2334D058" alt="Supported Python versions">
-</a>
 
 ## Introduction
 
