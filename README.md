@@ -181,3 +181,8 @@ A world at peace, amidst the strife.
 
 ....
 ```
+
+## References
+
+- [Chat Templates](https://huggingface.co/blog/chat-templates)
+- [stanford_alpaca](https://github.com/tatsu-lab/stanford_alpaca#data-release)
