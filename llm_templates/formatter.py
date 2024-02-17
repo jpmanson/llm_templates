@@ -8,9 +8,11 @@ HF_URL = 'https://huggingface.co/'
 
 
 class Formatter:
-    def __init__(self, model_name: str = None, use_cache: bool = True, clear_cache_on_create: bool = False):
+    def __init__(self, model_name: str = None, use_cache: bool = True,
+                 clear_cache_on_create: bool = False, huggingface_api_key: str = None):
         self.model_name = model_name
         self.use_cache = use_cache
+        self.huggingface_api_key = huggingface_api_key
         if clear_cache_on_create:
             clear_cache()
 
@@ -29,8 +31,11 @@ class Formatter:
 
         if not tokenizer_config:
             # Get model tokenizer json
+            headers = {}
+            if self.huggingface_api_key:
+                headers["Authorization"] = f"Bearer {self.huggingface_api_key}"
             url = f"{HF_URL}{model}/raw/main/tokenizer_config.json"
-            response = requests.get(url)
+            response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 tokenizer_config = response.json()
                 save_in_cache(model, tokenizer_config)
