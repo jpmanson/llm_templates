@@ -21,7 +21,7 @@ formatter = Formatter()
 
 # Hugging Face models
 model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
-model = "HuggingFaceH4/zephyr-7b-beta"
+# model = "HuggingFaceH4/zephyr-7b-beta"
 # model = "meta-llama/Llama-2-7b-chat-hf"
 conversation = Conversation(model=model, messages=messages)
 conversation_str = formatter.render(conversation, add_assistant_prompt=True)
