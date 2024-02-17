@@ -103,5 +103,9 @@ def hf_render(conversation: Conversation, tokenizer_config: dict, **kwargs) -> s
 
     template = jinja_env.from_string(template_str)
 
+    for k, v in tokenizer_config.items():
+        if isinstance(v, dict) and tokenizer_config[k].get('__type') == 'AddedToken':
+            tokenizer_config[k] = str(tokenizer_config[k].get('content'))
+
     return template.render(messages=conversation.messages, **tokenizer_config,
                            add_generation_prompt=add_generation_prompt)

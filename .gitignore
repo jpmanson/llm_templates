@@ -144,3 +144,4 @@ bak/*
 .env
 .idea
 .venv
+test
