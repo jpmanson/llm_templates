@@ -17,10 +17,6 @@ messages = [
 
 formatter = Formatter()
 
-# Local model
-conversation = Conversation(model="llama2", messages=messages)
-print(formatter.render(conversation))
-
 # Hugging Face models
 model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 # model = "HuggingFaceH4/zephyr-7b-beta"
