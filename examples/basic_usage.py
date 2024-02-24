@@ -1,19 +1,8 @@
-from llm_templates import Formatter, Conversation
+from llm_templates import Formatter, Conversation, Content
 
-messages = [
-    {
-        "role": "user",
-        "content": "Hello!"
-    },
-    {
-        "role": "assistant",
-        "content": "How can I help you?"
-    },
-    {
-        "role": "user",
-        "content": "Write a poem about the sea"
-    }
-]
+messages = [Content(role="user", content="Hello!"),
+            Content(role="assistant", content="How can I help you?"),
+            Content(role="user", content="Write a poem about the sea")]
 
 formatter = Formatter()
 
@@ -30,4 +19,9 @@ print(formatter.render(conversation))
 # Local model zephyr
 print('# zephyr')
 conversation = Conversation(model="zephyr", messages=messages)
+print(formatter.render(conversation))
+
+# Local model zephyr
+print('# gemma')
+conversation = Conversation(model="gemma", messages=messages)
 print(formatter.render(conversation))

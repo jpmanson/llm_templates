@@ -13,6 +13,19 @@ class Conversation(BaseModel):
     model: Optional[str]
     messages: List[Content]
 
+    def __str__(self):
+        return f"model: {self.model}, messages: {self.messages}"
+
+    def __repr__(self):
+        return f"model: {self.model}, messages: {self.messages}"
+
+    def append_prompt(self, role: str = None, message: str = None, content: Content = None):
+        if content is not None:
+            self.messages.append(content)
+        else:
+            self.messages.append(Content(role=role, content=message))
+        return self
+
 
 # Function to raise exception from Jinja2 templates
 def raise_exception(message):
