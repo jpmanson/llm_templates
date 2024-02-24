@@ -11,6 +11,14 @@ You can quick start with the library using the following [Colab notebook](https:
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp)
 
+The library has built in templates for the following models:
+- `zephyr`
+- `llama2`
+- `mistral`
+- `gemma`
+
+And HuggingFace models, using Jinja2 templates when tokenizer_config.json file when available.
+
 ## Introduction
 
 Many models are based on foundational or pre-trained LLMs, which are then retrained (fin-tuning) with specially designed instruction datasets to improve and refine the abilities of these models on specific tasks:
@@ -138,21 +146,13 @@ How can I help you? </s>
 You can also use HuggingFace models:
 
 ```python
-from llm_templates import Formatter, Conversation
-messages = [
-    {
-        "role": "user",
-        "content": "Hello!"
-    },
-    {
-        "role": "assistant",
-        "content": "How can I help you?"
-    },
-    {
-        "role": "user",
-        "content": "Write a poem about the sea"
-    }
-]
+from llm_templates import Formatter, Conversation, Content
+
+messages = [Content(role="user", content="Hello!"),
+            Content(role="assistant", content="How can I help you?"),
+            Content(role="user", content="Write a poem about the sea")]
+
+formatter = Formatter()
 
 # Apply HuggingFace Mixtral model template
 model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
