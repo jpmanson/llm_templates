@@ -21,7 +21,7 @@ print('# zephyr')
 conversation = Conversation(model="zephyr", messages=messages)
 print(formatter.render(conversation))
 
-# Local model zephyr
+# Local model gemma
 print('# gemma')
 conversation = Conversation(model="gemma", messages=messages)
 print(formatter.render(conversation))
