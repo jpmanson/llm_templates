@@ -7,21 +7,21 @@ messages = [Content(role="user", content="Hello!"),
 formatter = Formatter()
 
 # Local model mistral
-print('# mistral')
+print('\n# mistral')
 conversation = Conversation(model="mistral", messages=messages)
 print(formatter.render(conversation))
 
 # Local model llama2
-print('# llama2')
+print('\n# llama2')
 conversation = Conversation(model="llama2", messages=messages)
 print(formatter.render(conversation))
 
 # Local model zephyr
-print('# zephyr')
+print('\n# zephyr')
 conversation = Conversation(model="zephyr", messages=messages)
 print(formatter.render(conversation))
 
 # Local model gemma
-print('# gemma')
+print('\n# gemma')
 conversation = Conversation(model="gemma", messages=messages)
 print(formatter.render(conversation))

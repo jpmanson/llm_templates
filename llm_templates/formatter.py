@@ -40,7 +40,8 @@ class Formatter:
                 tokenizer_config = response.json()
                 save_in_cache(model, tokenizer_config)
             else:
-                raise ValueError(f"Model {model} configuration not found in server")
+                raise ValueError(f"Model {model} configuration not found in server. "
+                                 f"Some models require a token: Formatter(huggingface_api_key=HUGGINGFACE_TOKEN)")
 
         return tokenizer_config
 
