@@ -25,3 +25,8 @@ print(formatter.render(conversation))
 print('\n# gemma')
 conversation = Conversation(model="gemma", messages=messages)
 print(formatter.render(conversation))
+
+# Local model llama3
+print('\n# llama3')
+conversation = Conversation(model="llama3", messages=messages)
+print(formatter.render(conversation, add_assistant_prompt=True))

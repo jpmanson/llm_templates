@@ -14,8 +14,33 @@ You can quick start with the library using the following [Colab notebook](https:
 The library has built in templates for the following models:
 - `zephyr`
 - `llama2`
+- `llama3`
 - `mistral`
 - `gemma`
+
+This is a quick example with Llama3 model:
+```python
+from llm_templates import Formatter, Conversation, Content
+
+messages = [Content(role="user", content="Hello!"),
+            Content(role="assistant", content="How can I help you?"),
+            Content(role="user", content="Write a poem about the sea")]
+
+conversation = Conversation(model='llama3', messages=messages)
+conversation_str = Formatter().render(conversation, add_assistant_prompt=True)
+
+print(conversation_str)
+```
+And the result will be:
+```
+<|begin_of_text|><|start_header_id|>user<|end_header_id|>
+Hello!<|eot_id|>
+<|start_header_id|>assistant<|end_header_id|>
+How can I help you?<|eot_id|>
+<|start_header_id|>user<|end_header_id|>
+Write a poem about the sea<|eot_id|>
+<|start_header_id|>assistant<|end_header_id|>
+```
 
 And HuggingFace models, using [Jinja2](https://github.com/pallets/jinja) templates when tokenizer_config.json file is available.
 
@@ -191,3 +216,4 @@ A world at peace, amidst the strife.
 - [Chat Templates](https://huggingface.co/blog/chat-templates)
 - [stanford_alpaca](https://github.com/tatsu-lab/stanford_alpaca#data-release)
 - [Gemma Formatting](https://ai.google.dev/gemma/docs/formatting?hl=es-419)
+- [Meta Llama 3 chat](https://llama.meta.com/docs/model-cards-and-prompt-formats/meta-llama-3/)
