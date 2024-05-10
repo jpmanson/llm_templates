@@ -7,7 +7,7 @@ It's a conversation formatter for chat models. The library allows you to easily 
 pip install llm-templates
 ```
 
-You can quick start with the library using the following [Colab notebook](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp):
+You can quickly start with the library using the following [Colab notebook](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp):
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp)
 
@@ -179,7 +179,7 @@ messages = [Content(role="user", content="Hello!"),
 
 formatter = Formatter()
 
-# Apply HuggingFace Mixtral model template
+# Apply Hugging Face Mixtral model template
 model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
 # model = "HuggingFaceH4/zephyr-7b-beta"
 conversation = Conversation(model=model, messages=messages)
