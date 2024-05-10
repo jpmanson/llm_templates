@@ -18,6 +18,8 @@ The library has built in templates for the following models:
 - `mistral`
 - `gemma`
 
+...and HuggingFace models, using [Jinja2](https://github.com/pallets/jinja) templates when tokenizer_config.json file is available.
+
 This is a quick example with Llama3 model:
 ```python
 from llm_templates import Formatter, Conversation, Content
@@ -41,8 +43,6 @@ How can I help you?<|eot_id|>
 Write a poem about the sea<|eot_id|>
 <|start_header_id|>assistant<|end_header_id|>
 ```
-
-And HuggingFace models, using [Jinja2](https://github.com/pallets/jinja) templates when tokenizer_config.json file is available.
 
 ## Introduction
 
