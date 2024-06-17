@@ -145,3 +145,4 @@ bak/*
 .idea
 .venv
 test
+docs

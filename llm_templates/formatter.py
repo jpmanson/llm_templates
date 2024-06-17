@@ -2,7 +2,7 @@ from llm_templates.common import Conversation, get_jinja_env
 import requests
 import os
 import json
-from llm_templates.formats import zephyr, mistral, llama2, gemma, llama3
+from llm_templates.formats import zephyr, mistral, llama2, gemma, llama3, cohere, phi3
 
 HF_URL = 'https://huggingface.co/'
 
@@ -35,13 +35,17 @@ class Formatter:
             if self.huggingface_api_key:
                 headers["Authorization"] = f"Bearer {self.huggingface_api_key}"
             url = f"{HF_URL}{model}/raw/main/tokenizer_config.json"
-            response = requests.get(url, headers=headers)
+            response = requests.get(url, headers=headers, allow_redirects=True)
             if response.status_code == 200:
                 tokenizer_config = response.json()
                 save_in_cache(model, tokenizer_config)
+            elif response.status_code == 404:
+                raise ValueError(f"Model {model} not found in Hugging Face")
+            elif response.status_code == 403:
+                raise ValueError(f"Model {model} forbidden. "
+                                 f"Some models require a token: Formatter(huggingface_api_key=HUGGINGFACE_TOKEN) and agreement with the model's license")
             else:
-                raise ValueError(f"Model {model} configuration not found in server. "
-                                 f"Some models require a token: Formatter(huggingface_api_key=HUGGINGFACE_TOKEN)")
+                raise ValueError(f"Model {model} failed to load. Status code: {response.status_code}")
 
         return tokenizer_config
 
@@ -100,7 +104,14 @@ def clear_cache() -> None:
 def hf_render(conversation: Conversation, tokenizer_config: dict, **kwargs) -> str:
     add_generation_prompt = kwargs.get("add_assistant_prompt", False)
 
+    template_name = kwargs.get("template_name", 'default')
+
     template_str = tokenizer_config.get("chat_template", '')
+
+    if isinstance(template_str, list):
+        template_str = [t for t in template_str if t.get('name') == template_name][0]['template']
+    elif isinstance(template_str, dict):
+        template_str = template_str.get('template')
 
     template = get_jinja_env().from_string(template_str)
 

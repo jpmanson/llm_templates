@@ -17,6 +17,8 @@ The library has built in templates for the following models:
 - `llama3`
 - `mistral`
 - `gemma`
+- `cohere`
+- `phi3`
 
 ...and HuggingFace models, using [Jinja2](https://github.com/pallets/jinja) templates when tokenizer_config.json file is available.
 

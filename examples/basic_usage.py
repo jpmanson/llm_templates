@@ -30,3 +30,13 @@ print(formatter.render(conversation))
 print('\n# llama3')
 conversation = Conversation(model="llama3", messages=messages)
 print(formatter.render(conversation, add_assistant_prompt=True))
+
+# Local model cohere default chat template
+print('\n# cohere')
+conversation = Conversation(model="cohere", messages=messages)
+print(formatter.render(conversation, add_assistant_prompt=True))
+
+# Local model phi3
+print('\n# phi3')
+conversation = Conversation(model="phi3", messages=messages)
+print(formatter.render(conversation, add_assistant_prompt=True))
