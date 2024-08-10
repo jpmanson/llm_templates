@@ -15,6 +15,7 @@ The library has built in templates for the following models:
 - `zephyr`
 - `llama2`
 - `llama3`
+- `llama31`
 - `mistral`
 - `gemma`
 - `cohere`
