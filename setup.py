@@ -11,7 +11,7 @@ setuptools.setup(
     description="Instruction/chat prompts creation library for text generation LLMs. It supports local and Hugging Face models.",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/jpmanson/llm-templates",
+    url="https://github.com/jpmanson/llm_templates",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[],
