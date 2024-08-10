@@ -40,3 +40,8 @@ print(formatter.render(conversation, add_assistant_prompt=True))
 print('\n# phi3')
 conversation = Conversation(model="phi3", messages=messages)
 print(formatter.render(conversation, add_assistant_prompt=True))
+
+# Local model llama 3.1
+print('\n# llama 3.1')
+conversation = Conversation(model="llama31", messages=messages)
+print(formatter.render(conversation, add_assistant_prompt=True))
