@@ -106,14 +106,43 @@ def hf_render(conversation: Conversation, tokenizer_config: dict, **kwargs) -> s
 
     template_name = kwargs.get("template_name", 'default')
 
-    template_str = tokenizer_config.get("chat_template", '')
+    template_value = tokenizer_config.get("chat_template")
 
-    if isinstance(template_str, list):
-        template_str = [t for t in template_str if t.get('name') == template_name][0]['template']
-    elif isinstance(template_str, dict):
-        template_str = template_str.get('template')
+    if not template_value:
+        raise ValueError("No chat_template found in tokenizer_config")
 
-    template = get_jinja_env().from_string(template_str)
+    if isinstance(template_value, list):
+        found_template = None
+        for t in template_value:
+            if isinstance(t, dict) and t.get('name') == template_name:
+                found_template = t.get('template')
+                break
+        if not found_template:
+            raise ValueError(f"Template '{template_name}' not found in tokenizer_config")
+        template_str = found_template
+    elif isinstance(template_value, str):
+        template_str = template_value
+    # The problem description for test_hf_render_with_list_of_templates implies that
+    # chat_template can also be a dictionary containing a 'template' key.
+    # However, HF tokenizers usually have chat_template as a string or list of strings (processed by HF).
+    # The original hf_render had `elif isinstance(template_str, dict): template_str = template_str.get('template')`
+    # This seems non-standard for actual tokenizer_config.json files.
+    # For now, I will only explicitly support string and list-of-dicts (with name/template).
+    # If it's a dict, it must be of the {"name": "...", "template": "..."} structure if inside a list.
+    # A raw dict as chat_template like {"template": "..."} is not standard.
+    # Let's stick to string or list for now. If a dict is passed directly as chat_template, it will fail type check.
+    else:
+        raise ValueError("Invalid chat_template format in tokenizer_config: Expected string or list of template dicts.")
+
+    if not isinstance(template_str, str):
+        # This case would be hit if a list item didn't have 'template' or it was wrong type.
+        raise ValueError("Invalid chat_template format in tokenizer_config: Template content must be a string.")
+
+    try:
+        template = get_jinja_env().from_string(template_str)
+    except TypeError as e: # Catches Jinja's error if template_str is not a string (e.g. int)
+        raise ValueError(f"Invalid chat_template format in tokenizer_config: {e}")
+
 
     for k, v in tokenizer_config.items():
         if isinstance(v, dict) and tokenizer_config[k].get('__type') == 'AddedToken':

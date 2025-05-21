@@ -10,7 +10,7 @@ class Content(BaseModel):
 
 # simplified version of openai.types.chat completion_create_params.py
 class Conversation(BaseModel):
-    model: Optional[str]
+    model: Optional[str] = None
     messages: List[Content]
 
     def __str__(self):
@@ -19,11 +19,14 @@ class Conversation(BaseModel):
     def __repr__(self):
         return f"model: {self.model}, messages: {self.messages}"
 
-    def append_prompt(self, role: str = None, message: str = None, content: Content = None):
-        if content is not None:
-            self.messages.append(content)
+    def append_prompt(self, role_or_content: Optional[str | Content] = None, message: Optional[str] = None):
+        if isinstance(role_or_content, Content):
+            self.messages.append(role_or_content)
+        elif role_or_content is not None and message is not None:
+            self.messages.append(Content(role=role_or_content, content=message))
         else:
-            self.messages.append(Content(role=role, content=message))
+            # Or raise an error if arguments are not as expected
+            raise ValueError("append_prompt requires either a Content object or role and message strings.")
         return self
 
 
