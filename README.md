@@ -7,6 +7,14 @@ It's a conversation formatter for chat models. The library allows you to easily 
 pip install llm-templates
 ```
 
+or with [uv](https://docs.astral.sh/uv/):
+
+```
+uv add llm-templates
+```
+
+Requires Python 3.10 or newer.
+
 You can quickly start with the library using the following [Colab notebook](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp):
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/187sA0rGwVLiP6A3IyvV0ICglsJQmvQa3#scrollTo=sUjN9PDx-dcp)
